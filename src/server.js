@@ -63,4 +63,4 @@ app.post("/contact", async (req, res, next) => {
   }
 });
 
-app.listen(3000, () => console.log("Server is running!"));
+app.listen(process.env.PORT || 3000, () => console.log("Server is running!"));
