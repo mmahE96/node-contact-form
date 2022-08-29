@@ -13,12 +13,11 @@ const oAuth2Client = new google.auth.OAuth2(
 oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
 
 async function sendMail(req, res) {
-  res.header("Access-Control-Allow-Origin", "*");
-    const {name, email, message}=req.body;
-    
+  const { name, email, message } = req.body;
+
   try {
     const accessToken = await oAuth2Client.getAccessToken();
- 
+
     const transport = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -39,7 +38,6 @@ async function sendMail(req, res) {
     console.log(error);
     res.send(error);
   }
-  
 }
 
 async function getUser(req, res) {
