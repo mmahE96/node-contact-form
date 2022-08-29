@@ -13,6 +13,12 @@ const oAuth2Client = new google.auth.OAuth2(
 oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
 
 async function sendMail(req, res) {
+  const token = req.headers["user-token"];
+
+  if (token !== process.env.AUTH_TOKEN) {
+    return res.status(403).send({ message: "Unauthorized" });
+  }
+
   const { name, email, message } = req.body;
 
   try {
